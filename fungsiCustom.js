@@ -1,4 +1,6 @@
 // TODO: import module bila dibutuhkan di sini
+const fs = require("fs");
+//import 'babel-polyfill';
 
 // ! JANGAN DIMODIFIKASI
 let file1 = "./data1.json";
@@ -18,7 +20,44 @@ let modifyFile3 = (val) => {
 
 // TODO: Kerjakan bacaData
 // gunakan variabel file1, file2, dan file3
-const bacaData = null;
+
+//const hasilAkhir = {...modifyFile1,...modifyFile2,...modifyFile3};
+//console.log(hasilAkhir);
+const bacaData = (baca) => {
+  let result = [];
+  fs.readFile(file1,'utf-8',
+  (err,dataRead) => {
+    if (err) {
+      return console.log("Error: " + err);
+    }
+    let data = JSON.parse(dataRead);
+    console.log(data);
+    message = data[0].message;
+    result.push(message.split("")[1]);
+    fs.readFile(file2,"utf-8",
+    (err,dataRead) => {
+      if (err) {
+        return console.log("Error:" + err);
+      }
+      let data = JSON.parse(dataRead);
+      console.log(data);
+      message = data[0].message;
+      result.push(message.split("")[1]);
+      fs.readFile(file3,"utf-8",
+      (err,dataRead) => {
+        if (err) {
+          return console.log("Error:" + err);
+        }
+        let data = JSON.parse(dataRead);
+        console.log(data);
+        message = data[0].message;
+        result.push(message.split("")[1]);
+    console.log(result);
+    baca(err,result);
+    })
+  })
+})
+}
 
 // ! JANGAN DIMODIFIKASI
 module.exports = {
