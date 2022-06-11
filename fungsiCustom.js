@@ -1,6 +1,5 @@
 // TODO: import module bila dibutuhkan di sini
-const fs = require("fs");
-//import 'babel-polyfill';
+const fs = require('fs')
 
 // ! JANGAN DIMODIFIKASI
 let file1 = "./data1.json";
@@ -20,43 +19,26 @@ let modifyFile3 = (val) => {
 
 // TODO: Kerjakan bacaData
 // gunakan variabel file1, file2, dan file3
-
-//const hasilAkhir = {...modifyFile1,...modifyFile2,...modifyFile3};
-//console.log(hasilAkhir);
 const bacaData = (baca) => {
-  let result = [];
-  fs.readFile(file1,'utf-8',
-  (err,dataRead) => {
-    if (err) {
-      return console.log("Error: " + err);
-    }
-    let data = JSON.parse(dataRead);
-    console.log(data);
-    message = data[0].message;
-    result.push(message.split("")[1]);
-    fs.readFile(file2,"utf-8",
-    (err,dataRead) => {
-      if (err) {
-        return console.log("Error:" + err);
-      }
-      let data = JSON.parse(dataRead);
-      console.log(data);
-      message = data[0].message;
-      result.push(message.split("")[1]);
-      fs.readFile(file3,"utf-8",
-      (err,dataRead) => {
-        if (err) {
-          return console.log("Error:" + err);
-        }
-        let data = JSON.parse(dataRead);
-        console.log(data);
-        message = data[0].message;
-        result.push(message.split("")[1]);
-    console.log(result);
-    baca(err,result);
+
+  const result = [];
+  fs.readFile(file1, 'utf8', (err, data) => {
+    let dataRead = JSON.parse(data)
+    message = dataRead.message;
+    result.push(message.split(' ')[1])
+    fs.readFile(file2, 'utf8', (err, data) => {
+      dataRead = JSON.parse(data)
+      message = dataRead[0].message;
+      result.push(message.split(' ')[1])
+      fs.readFile(file3, 'utf8', (err, data) => {
+        dataRead = JSON.parse(data)
+        message = dataRead[0].data.message;
+        result.push(message.split(' ')[1])
+        console.log(result)
+        baca(err, result)
+      })
     })
   })
-})
 }
 
 // ! JANGAN DIMODIFIKASI
